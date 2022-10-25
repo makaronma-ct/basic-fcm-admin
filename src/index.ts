@@ -13,17 +13,41 @@ const app =
       });
 
 const messaging = getMessaging(app);
+
 messaging.send({
+  // the popup title&body
   notification: {
-    title: "$FooCorp up 1.43% on the day",
-    body: "$FooCorp gained 11.80 points to close at 835.67, up 1.43% on the day.",
+    title: "Sent from basic-fcm-admin",
+    body: "Hello world",
   },
+
+  // data will be passed into the app
   data: {
-    title: "p22",
-    body: "body123",
-    url: "example.com",
-    image: "image123",
+    title: "titletitle",
+    body: "bodybody",
+    url: "https://example.com",
+    image: "image url",
     sent_at: "Sent at123",
   },
+
+  // send to all devices with topic ['all']
   condition: "'all' in topics",
+
+  /**
+   * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
+   */
+  apns: {
+    headers: {
+      "apns-priority": "5",
+    },
+    payload: {
+      aps: {
+        contentAvailable: true,
+      },
+    },
+  },
+
+  android: {
+
+  },
 });
