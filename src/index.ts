@@ -1,8 +1,9 @@
+import { config } from 'dotenv';
 import { credential } from 'firebase-admin';
 import { getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { getMessaging } from 'firebase-admin/messaging';
 
-require("dotenv").config();
+config();
 
 const app =
   getApps().length > 0
