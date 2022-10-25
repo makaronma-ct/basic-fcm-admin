@@ -14,40 +14,46 @@ const app =
 
 const messaging = getMessaging(app);
 
-messaging.send({
-  // the popup title&body
-  notification: {
-    title: "Sent from basic-fcm-admin",
-    body: "Hello world",
-  },
-
-  // data will be passed into the app
-  data: {
-    title: "titletitle",
-    body: "bodybody",
-    url: "https://example.com",
-    image: "image url",
-    sent_at: "Sent at123",
-  },
-
-  // send to all devices with topic ['all']
-  condition: "'all' in topics",
-
-  /**
-   * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
-   */
-  apns: {
-    headers: {
-      "apns-priority": "5",
+messaging
+  .send({
+    // the popup title&body
+    notification: {
+      title: "Sent from basic-fcm-admin",
+      body: "Hello world",
     },
-    payload: {
-      aps: {
-        contentAvailable: true,
+
+    // data will be passed into the app
+    data: {
+      title: "titletitle",
+      body: "bodybody",
+      url: "https://example.com",
+      image: "image url",
+      sent_at: "Sent at123",
+    },
+
+    // send to all devices with topic ['all']
+    condition: "'all' in topics",
+
+    /**
+     * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
+     */
+    apns: {
+      headers: {
+        "apns-priority": "5",
+        // 'apns-push-type': 'background', // this make notif slient (no popup)
+      },
+      payload: {
+        aps: {
+          contentAvailable: true,
+        },
       },
     },
-  },
 
-  android: {
-
-  },
-});
+    android: {},
+  })
+  .then(() => {
+    console.log("message sent!");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
