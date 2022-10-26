@@ -29,6 +29,11 @@ const msg: Message = {
     },
     payload: {
       aps: {
+        sound: {
+          critical: true,
+          name: "default",
+          // volume: 1.0,
+        },
         contentAvailable: true,
       },
     },
