@@ -1,4 +1,5 @@
 import { BaseMessage, Message } from "firebase-admin/messaging";
+import moment from "moment";
 
 const notification: BaseMessage["notification"] = {
   title: "Sent basic-fcm-asd",
@@ -7,12 +8,16 @@ const notification: BaseMessage["notification"] = {
 
 const msg: Message = {
   data: {
-    id: "123",
+    id: Date.now().toString(),
     title: "TTIITLE",
     body: "This is body...",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/121px-Rust_programming_language_black_logo.svg.png",
     url: "https://www.apple.com",
-    sent_at: Date.now().toString(),
+
+    /**
+     * to display after receive: moment(data.sent_at).fromNow()
+     */
+    sent_at: moment().utc().format("YYYY-MM-DDTHH:mm:ssZ"),
   },
   // condition,
   topic: "all",
