@@ -23,22 +23,17 @@ const msg: Message = {
   /**
    * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
    */
-  // apns: {
-  //   headers: {
-  //     "apns-priority": "5",
-  //     // 'apns-push-type': 'background', // this make notif slient (no popup)
-  //   },
-  //   payload: {
-  //     aps: {
-  //       sound: {
-  //         critical: true,
-  //         name: "default",
-  //         // volume: 1.0,
-  //       },
-  //       contentAvailable: true,
-  //     },
-  //   },
-  // },
+  apns: {
+    headers: {
+      // "apns-priority": "5",
+      // 'apns-push-type': 'background', // this make notif slient (no popup)
+    },
+    payload: {
+      aps: {
+        contentAvailable: true,
+      },
+    },
+  },
 
   /**
    * @android
