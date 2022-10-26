@@ -1,58 +1,49 @@
 import { BaseMessage, Message } from "firebase-admin/messaging";
 
-// data will be passed into the app
-const data: BaseMessage["data"] = {
-  title: "red",
-  body: "bodybody",
-  url: "https://example.com",
-  image: "image url",
-  sent_at: "Sent at123asd",
-};
-
 const notification: BaseMessage["notification"] = {
   title: "Sent basic-fcm-asd",
   body: "Hello world",
 };
 
 const msg: Message = {
-  data,
+  data: {
+    id: "123",
+    title: "TTIITLE",
+    body: "This is body...",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/121px-Rust_programming_language_black_logo.svg.png",
+    url: "https://www.apple.com",
+    sent_at: Date.now().toString(),
+  },
   // condition,
   topic: "all",
-  notification,
+
+  // send with "notification" payload will cause popup notificaiton,
+  // comment this if you want to customize the appearance of notification
+  // notification,
   /**
    * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
    */
-  apns: {
-    headers: {
-      "apns-priority": "5",
-      // 'apns-push-type': 'background', // this make notif slient (no popup)
-    },
-    payload: {
-      aps: {
-        sound: {
-          critical: true,
-          name: "default",
-          // volume: 1.0,
-        },
-        contentAvailable: true,
-      },
-    },
-  },
+  // apns: {
+  //   headers: {
+  //     "apns-priority": "5",
+  //     // 'apns-push-type': 'background', // this make notif slient (no popup)
+  //   },
+  //   payload: {
+  //     aps: {
+  //       sound: {
+  //         critical: true,
+  //         name: "default",
+  //         // volume: 1.0,
+  //       },
+  //       contentAvailable: true,
+  //     },
+  //   },
+  // },
 
   /**
    * @android
    */
-  android: {
-    notification: {
-      title: notification.title,
-      body: notification.body,
-      imageUrl: notification.imageUrl,
-      priority: "min",
-      sticky: true,
-    },
-    priority: "high",
-    fcmOptions: {},
-  },
+  android: {},
 
   /**
    * @website
