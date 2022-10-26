@@ -3,6 +3,8 @@ import { credential } from 'firebase-admin';
 import { getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { getMessaging } from 'firebase-admin/messaging';
 
+import msg from './msg';
+
 config();
 
 const app =
@@ -15,44 +17,10 @@ const app =
 const messaging = getMessaging(app);
 
 messaging
-  .send({
-    // the popup title&body
-    notification: {
-      title: "Sent from basic-fcm-admin",
-      body: "Hello world",
-    },
-
-    // data will be passed into the app
-    data: {
-      title: "titletitle",
-      body: "bodybody",
-      url: "https://example.com",
-      image: "image url",
-      sent_at: "Sent at123",
-    },
-
-    // send to all devices with topic ['all']
-    condition: "'all' in topics",
-
-    /**
-     * @ios using "contentAvailable" will wake the slept app up (able to setup backgroundMessageHandler)
-     */
-    apns: {
-      headers: {
-        "apns-priority": "5",
-        // 'apns-push-type': 'background', // this make notif slient (no popup)
-      },
-      payload: {
-        aps: {
-          contentAvailable: true,
-        },
-      },
-    },
-
-    android: {},
-  })
+  .send(msg)
   .then(() => {
     console.log("message sent!");
+    console.log({ msg });
   })
   .catch((err) => {
     console.log(err);
