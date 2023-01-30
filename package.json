@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "webpack --color --progress",
-    "dev": "yarn build --watch --hot"
+    "dev": "pnpm build --watch --hot"
   },
   "dependencies": {
     "firebase-admin": "^11.2.0",
