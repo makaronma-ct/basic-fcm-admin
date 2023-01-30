@@ -1,6 +1,7 @@
 import { BaseMessage, Message } from "firebase-admin/messaging";
 import moment from "moment";
 
+
 const notification: BaseMessage["notification"] = {
   title: "Sent basic-fcm-asd",
   body: "Hello world",
@@ -20,7 +21,8 @@ const msg: Message = {
     sent_at: moment().utc().format("YYYY-MM-DDTHH:mm:ssZ"),
   },
   // condition,
-  topic: "all",
+  // topic: "article",
+  token: "",
 
   // send with "notification" payload will cause popup notificaiton,
   // comment this if you want to customize the appearance of notification
@@ -43,12 +45,18 @@ const msg: Message = {
   /**
    * @android
    */
-  android: {},
+  android: {
+    priority: 'high'
+  },
 
   /**
    * @website
    */
-  webpush: {},
+  webpush: {
+    fcmOptions:{
+      link: "www.linkToRedirectOnPress.com"
+    }
+  },
 };
 
 export default msg;

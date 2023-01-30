@@ -132,3 +132,4 @@ dist
 .well-known/*
 
 service-account-key.json
+service-account-key-prod.json
